@@ -22,14 +22,10 @@ public class ActionMappingManager {
 	
 	public ActionMappingManager() {	}
 	// 读取配置文件并解析
-	public ActionMappingManager(String[] configFiles) {
+	public ActionMappingManager(String[] configFiles) throws Exception {
 		//  校验入参
 		if (null == configFiles || configFiles.length <= 0) {
-			try {
-				throw new Exception("请指定action的配置文件！");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			throw new Exception("请指定action的配置文件！");
 		}
 		// 遍历action配置文件，并解析初始化到actionMappings中
 		for (String cfgFile : configFiles) {
@@ -41,8 +37,9 @@ public class ActionMappingManager {
 	 * 根据action类名获取action配置
 	 * @param actionName 名称
 	 * @return ActionMapping
+	 * @throws Exception 
 	 */
-	public ActionMapping getActionMapping(String actionName) {
+	public ActionMapping getActionMapping(String actionName) throws Exception {
 		if (StringUtils.isBlank(actionName)) {
 			try {
 				throw new Exception("入参actionName不允许为空！");
@@ -52,11 +49,7 @@ public class ActionMappingManager {
 		}
 		ActionMapping am = this.actionMappings.get(actionName);
 		if (null == am) {
-			try {
-				throw new Exception("没有Action["+actionName+"]的配置！");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			throw new Exception("没有Action["+actionName+"]的配置！");
 		}
 		
 		return am;

@@ -85,7 +85,11 @@ public class ActionServlet extends HttpServlet {
 			}
 		}
 
-		this.amm = new ActionMappingManager(configFiles.replaceAll("\\s*", "").split(","));
+		try {
+			this.amm = new ActionMappingManager(configFiles.replaceAll("\\s*", "").split(","));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {
