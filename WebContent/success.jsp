@@ -7,6 +7,8 @@
 <title>登录成功页面</title>
 </head>
 <body>
-欢迎${username}，这个是登录成功页面。
+欢迎<font color="green" size="5px">${username}</font>，这个是登录成功页面。
+<br>
+回到<a href="index.jsp">登录页面</a>
 </body>
 </html>
