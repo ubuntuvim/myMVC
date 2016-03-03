@@ -11,10 +11,15 @@ public class LoginAction implements Action {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		System.out.println("=================================");
-		request.setAttribute("test", "测试数据传递。");
-		
-		return SUCCESS;
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		//  简单判断，如果用户名和密码都是admin则登录成
+		if (username.equals(password)) {
+			request.setAttribute("username", username);
+			return SUCCESS;
+		} else {
+			return "fail";
+		}
 	}
 
 }
