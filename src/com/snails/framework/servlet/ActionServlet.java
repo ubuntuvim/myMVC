@@ -45,11 +45,12 @@ public class ActionServlet extends HttpServlet {
 			//  执行实现类的业务逻辑
 			String result = action.execute(request, response);
 			if (StringUtils.isBlank(result)) {
-				response.sendError(404, "为配置Action对应的input元素。");
+				response.sendError(404, "未配置Action对应的input元素。");
 				return;
 			}
 			
 			Map<String, String> resultMap = am.getResult(result);
+			//  map的key暂时写死
 			if (Boolean.parseBoolean(resultMap.get("REDIRECT"))) {
 				response.sendRedirect(resultMap.get("RESULT_CONTENT"));
 			} else {
@@ -86,10 +87,12 @@ public class ActionServlet extends HttpServlet {
 		}
 
 		try {
+			//  先去除分割配置文件间的空格（如果有）
 			this.amm = new ActionMappingManager(configFiles.replaceAll("\\s*", "").split(","));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("================ Action配置加载完成 ===================");
 	}
 	
 	public static void main(String[] args) {

@@ -41,11 +41,7 @@ public class ActionMappingManager {
 	 */
 	public ActionMapping getActionMapping(String actionName) throws Exception {
 		if (StringUtils.isBlank(actionName)) {
-			try {
-				throw new Exception("入参actionName不允许为空！");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			throw new Exception("入参actionName不允许为空！");
 		}
 		ActionMapping am = this.actionMappings.get(actionName);
 		if (null == am) {
